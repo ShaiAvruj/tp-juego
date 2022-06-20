@@ -3467,8 +3467,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
-  steerSpeed: 180
-  Gap: 20
+  giroSpeed: 180
+  Hueco: 20
   GOText: {fileID: 1219821624}
   botonRepetir: {fileID: 1451634527}
   Score: 0

@@ -7,8 +7,8 @@ using UnityEngine.SceneManagement;
 public class SnakeControl : MonoBehaviour
 {
     public float moveSpeed = 5;
-    public float steerSpeed = 180;
-    public int Gap;
+    public float giroSpeed = 180;
+    public int Hueco;
     public GameObject GOText;
     public GameObject botonRepetir;
     public int Score;
@@ -31,22 +31,21 @@ public class SnakeControl : MonoBehaviour
         Tiempo.text = ""+ Mathf.Floor(Time.time);
         transform.position += transform.forward * moveSpeed * Time.deltaTime;
 
-        float steerDirection = Input.GetAxis("Horizontal");
+        float giroDireccion = Input.GetAxis("Horizontal");
 
-        transform.Rotate(Vector3.up * steerDirection * steerSpeed * Time.deltaTime);
+        transform.Rotate(Vector3.up * giroDireccion * giroSpeed * Time.deltaTime);
 
         PositionHistory.Insert(0, transform.position);
 
-        int index = 0;
-        foreach (var body in Cuerpos)
+        for (int i = 0; i < Cuerpos.Count; i++)
         {
-            Vector3 point = PositionHistory[Mathf.Clamp(index * Gap, 0, PositionHistory.Count - 1)];
+            GameObject body = Cuerpos[i];
+            Vector3 point = PositionHistory[Mathf.Clamp(i * Hueco, 0, PositionHistory.Count - 1)];
 
-            Vector3 moveDirection = point - body.transform.position;
-            body.transform.position += moveDirection * moveSpeed * Time.deltaTime;
+            Vector3 moveDireccion = point - body.transform.position;
+            body.transform.position += moveDireccion * moveSpeed * Time.deltaTime;
 
             body.transform.LookAt(point);
-            index++;
         }
         Puntuacion.text = Score.ToString();
     }
